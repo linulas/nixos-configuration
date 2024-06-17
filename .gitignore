@@ -1,0 +1,4 @@
+# Local (must be added manually in order to build the configuration)
+/home/local
+.sops.yaml
+hardware-configuration.nix
