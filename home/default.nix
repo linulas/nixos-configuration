@@ -35,6 +35,7 @@ in
       stylua
       synergy
       telegram-desktop
+      tutanota-desktop
       xarchiver
       nodePackages.svelte-language-server
       nodePackages.typescript-language-server
