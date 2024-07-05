@@ -101,7 +101,7 @@ in
     defaultUserShell = pkgs.zsh;
     users."${env.nixUser}" = {
       isNormalUser = true;
-      description = "Main user";
+      description = env.nixUser;
       extraGroups = [ "networkmanager" "wheel" ];
     };
   };
@@ -119,6 +119,7 @@ in
     dmenu
     docker
     fd
+    firefox
     gcc
     gnome.gnome-keyring
     gparted
