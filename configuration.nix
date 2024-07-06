@@ -126,6 +126,7 @@ in
     home-manager
     kitty
     libsecret
+    lm_sensors
     mangohud
     nerdfonts
     neovim
