@@ -24,6 +24,7 @@ in
       lua-language-server
       lutris
       marksman
+      multiviewer-for-f1
       neofetch
       netcoredbg
       nixpkgs-fmt
