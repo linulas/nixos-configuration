@@ -31,6 +31,7 @@ in
       nodejs_20
       obsidian
       prettierd
+      postman
       rustup
       spotify
       stylua
