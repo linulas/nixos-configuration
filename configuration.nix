@@ -102,7 +102,7 @@ in
     users."${env.nixUser}" = {
       isNormalUser = true;
       description = env.nixUser;
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" ];
     };
   };
 
@@ -187,6 +187,14 @@ in
   security = {
     polkit.enable = true;
     rtkit.enable = true;
+  };
+
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
   };
 
   systemd = {
