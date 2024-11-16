@@ -32,7 +32,7 @@ in
       obsidian
       prettierd
       rustup
-      spotify-player
+      spotify
       stylua
       synergy
       telegram-desktop
