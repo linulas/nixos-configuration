@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     sops-nix = {
       url = "github:mic92/sops-nix";
@@ -15,7 +16,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, ... }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
@@ -28,12 +29,21 @@
           allowUnfreePredicate = (pkg: true);
         };
       };
+
+      pkgsUnstable = import nixpkgs-unstable {
+        inherit system;
+
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = (pkg: true);
+        };
+      };
     in
     {
       nixosConfigurations = {
         default = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs outputs system pkgs; };
+          specialArgs = { inherit inputs outputs system pkgs pkgsUnstable; };
 
           modules = [
             ./configuration.nix

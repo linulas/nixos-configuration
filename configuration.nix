@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, pkgsUnstable, ... }:
 
 let
   env = import ./home/local/env.nix; # NOTE: Untracked file, must be added manually
@@ -129,7 +129,7 @@ in
     lm_sensors
     mangohud
     nerdfonts
-    neovim
+    pkgsUnstable.neovim
     networkmanagerapplet
     nil
     nitrogen
