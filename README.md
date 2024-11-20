@@ -59,3 +59,15 @@ update
 # Rebuilds the home-manager configuration.
 updatehome
 ```
+
+## Upgrade
+
+After build, you can get the latest updates from the current channel with these aliases (this will generate new flake.lock files):
+
+```bash
+# Get the latest updates from the current channel
+upgrade
+
+# Get the latest update from the current channel for home-manager
+upgradehome
+```
