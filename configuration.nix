@@ -115,6 +115,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    pkgsUnstable._1password-cli
+    pkgsUnstable._1password-gui
     bottles
     dmenu
     docker
@@ -162,8 +164,6 @@ in
   programs = {
     thunar.enable = true;
     dconf.enable = true;
-    _1password.enable = true;
-    _1password-gui.enable = true;
     zsh = {
       enable = true;
       enableCompletion = true;
