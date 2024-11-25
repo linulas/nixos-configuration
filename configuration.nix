@@ -32,6 +32,7 @@ in
       allowedTCPPorts = env.tcpPorts;
       allowedUDPPorts = env.udpPorts;
     };
+    extraHosts = env.hosts;
     hostName = env.hostName;
     networkmanager.enable = true;
   };

@@ -4,4 +4,7 @@
   tcpPorts = builtins.trace "TCP_PORTS: []" [];
   udpPorts = builtins.trace "UDP_PORTS: []" [];
   hostName = builtins.trace "HOST_NAME: NixOS" "NixOS";
+  hosts = builtins.trace "HOSTS:"
+      ''
+      '';
 }
