@@ -56,8 +56,6 @@ in
     LC_TIME = "en_US.utf8"; # required by dmenu don't change this
   };
 
-  sound.enable = true;
-
   services = {
     xserver = {
       videoDrivers = [ "nvidia" ];
@@ -128,7 +126,7 @@ in
     fd
     firefox
     gcc
-    gnome.gnome-keyring
+    gnome-keyring
     gparted
     home-manager
     kitty
@@ -222,13 +220,15 @@ in
   };
 
   hardware = {
-    bluetooth.enable = true;
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
-    nvidia.modesetting.enable = true;
+    bluetooth.enable = true;
+    nvidia = {
+      open = true;
+      modesetting.enable = true;
+    };
   };
 
   # This value determines the NixOS release from which the default
