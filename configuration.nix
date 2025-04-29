@@ -56,6 +56,35 @@ in
     LC_TIME = "en_US.utf8"; # required by dmenu don't change this
   };
 
+  security.pam.loginLimits = [
+    {
+      domain = "@audio";
+      type = "soft";
+      item = "rtprio";
+      value = "95";
+    }
+    {
+      domain = "@audio";
+      type = "hard";
+      item = "rtprio";
+      value = "99";
+    }
+    {
+      domain = "@audio";
+      type = "soft";
+      item = "memlock";
+      value = "unlimited";
+    }
+    {
+      domain = "@audio";
+      type = "hard";
+      item = "memlock";
+      value = "unlimited";
+    }
+  ];
+
+  powerManagement.cpuFreqGovernor = "performance";
+
   services = {
     xserver = {
       videoDrivers = [ "nvidia" ];
@@ -95,6 +124,7 @@ in
         support32Bit = true;
       };
       pulse.enable = true;
+      jack.enable = true;
     };
   };
 
@@ -105,7 +135,7 @@ in
     users."${env.nixUser}" = {
       isNormalUser = true;
       description = env.nixUser;
-      extraGroups = [ "networkmanager" "wheel" "docker" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" "audio" "video" ];
     };
   };
 
@@ -118,9 +148,11 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    alsa-utils  # for aconnect, aseqdump
     pkgsUnstable._1password-cli
     pkgsUnstable._1password-gui
     bottles
+    carla
     dmenu
     docker
     fd
@@ -130,6 +162,7 @@ in
     gparted
     home-manager
     kitty
+    jack_capture
     libsecret
     lm_sensors
     mangohud
@@ -143,6 +176,8 @@ in
     polkit_gnome
     protonup
     pulseaudioFull
+    qjackctl
+    qpwgraph
     ripgrep
     rofi
     sops
@@ -153,12 +188,28 @@ in
     zsh-powerlevel10k
   ];
 
-  environment.variables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-      "/home/${env.nixUser}/.steam/root/compatibilitytools.d";
-  };
+  environment.variables =
+    let
+      makePluginPath = format:
+        (pkgs.lib.makeSearchPath format [
+          "$HOME/.nix-profile/lib"
+          "/run/current-system/sw/lib"
+          "/etc/profiles/per-user/$USER/lib"
+        ])
+        + ":$HOME/.${format}";
+    in
+    {
+      DSSI_PATH = makePluginPath "dssi";
+      LADSPA_PATH = makePluginPath "ladspa";
+      LV2_PATH = makePluginPath "lv2";
+      LXVST_PATH = makePluginPath "lxvst";
+      VST_PATH = makePluginPath "vst";
+      VST3_PATH = makePluginPath "vst3";
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+        "/home/${env.nixUser}/.steam/root/compatibilitytools.d";
+    };
 
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })

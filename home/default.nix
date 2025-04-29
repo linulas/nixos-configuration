@@ -32,12 +32,15 @@ in
       obsidian
       prettierd
       postman
+      reaper
       rustup
       spotify
       stylua
+      surge-XT
       synergy
       telegram-desktop
       tutanota-desktop
+      vital
       xarchiver
       nodePackages.svelte-language-server
       nodePackages.typescript-language-server
