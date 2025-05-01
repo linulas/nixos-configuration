@@ -87,32 +87,17 @@ in
 
   services = {
     xserver = {
-      videoDrivers = [ "nvidia" ];
       enable = true;
       xkb = {
         variant = "";
         layout = "se";
       };
-      windowManager.i3 = {
+      excludePackages = [ pkgs.xterm ];
+      videoDrivers = [ "nvidia" ];
+      displayManager.gdm = {
         enable = true;
-        extraPackages = with pkgs; [
-          i3status
-        ];
+        wayland = true;
       };
-      desktopManager = {
-        xterm.enable = false;
-        xfce = {
-          enable = true;
-          noDesktop = true;
-          enableXfwm = false;
-        };
-      };
-      displayManager = {
-        lightdm.enable = true;
-      };
-    };
-    displayManager = {
-      defaultSession = "xfce+i3";
     };
     gvfs.enable = true;
     gnome.gnome-keyring.enable = true;
@@ -135,7 +120,7 @@ in
     users."${env.nixUser}" = {
       isNormalUser = true;
       description = env.nixUser;
-      extraGroups = [ "networkmanager" "wheel" "docker" "audio" "video" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" "audio" "video" "storage" "plugdev" ];
     };
   };
 
@@ -148,21 +133,25 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    alsa-utils  # for aconnect, aseqdump
+    alsa-utils
     pkgsUnstable._1password-cli
     pkgsUnstable._1password-gui
     bottles
     carla
     dmenu
     docker
+    dunst
     fd
     firefox
     gcc
     gnome-keyring
     gparted
     home-manager
+    hyprlock
+    hyprpolkitagent
     kitty
     jack_capture
+    libnotify
     libsecret
     lm_sensors
     mangohud
@@ -172,17 +161,16 @@ in
     nil
     nitrogen
     pasystray
-    picom
-    polkit_gnome
     protonup
     pulseaudioFull
+    pwvucontrol
     qjackctl
     qpwgraph
     ripgrep
-    rofi
     sops
     rocmPackages.llvm.lldb
     xclip
+    ulauncher
     unrar
     unzip
     zsh-powerlevel10k
@@ -216,8 +204,24 @@ in
   ];
 
   programs = {
-    thunar.enable = true;
-    dconf.enable = true;
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
+    };
+    waybar = {
+      enable = true;
+      package = pkgs.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      });
+    };
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+      xwayland.enable = true;
+    };
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -237,6 +241,7 @@ in
     steam = {
       enable = true;
       gamescopeSession.enable = true;
+      extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
   };
 
@@ -253,23 +258,6 @@ in
     };
   };
 
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart =
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-  };
-
   hardware = {
     graphics = {
       enable = true;
@@ -281,6 +269,9 @@ in
       modesetting.enable = true;
     };
   };
+
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

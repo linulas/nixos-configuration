@@ -49,9 +49,10 @@ in
 
     file = {
       ".config/kitty/kitty.conf".source = ./config/kitty.conf;
-      ".config/i3/config".source = ./config/i3.conf;
-      ".config/i3status/config".source = ./config/i3_status.conf;
-      ".config/picom/picom.conf".source = ./config/picom.conf;
+      ".config/waybar/config.jsonc".source = ./config/waybar/waybar.jsonc;
+      ".config/waybar/style.css".source = ./config/waybar/waybar_style.css;
+      ".config/waybar/launch_menu.sh".source = ./config/waybar/launch_menu.sh;
+      ".config/hypr/hyprland.conf".source = ./config/hyprland.conf;
     };
   };
 
