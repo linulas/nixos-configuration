@@ -19,6 +19,8 @@ in
     efi.canTouchEfiVariables = true;
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_latest; # Must have for networking to work with newer AMD motherboards
+
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs; };
     users = {
@@ -155,7 +157,6 @@ in
     libsecret
     lm_sensors
     mangohud
-    nerdfonts
     pkgsUnstable.neovim
     networkmanagerapplet
     nil
@@ -168,7 +169,7 @@ in
     qpwgraph
     ripgrep
     sops
-    rocmPackages.llvm.lldb
+    # rocmPackages.llvm.lldb
     xclip
     ulauncher
     unrar
@@ -199,8 +200,9 @@ in
         "/home/${env.nixUser}/.steam/root/compatibilitytools.d";
     };
 
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+  fonts.packages = [
+    pkgs.nerd-fonts.fira-code
+    pkgs.nerd-fonts.droid-sans-mono
   ];
 
   programs = {
