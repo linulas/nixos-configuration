@@ -59,6 +59,8 @@ in
   programs = {
     git = {
       enable = true;
+      userName = env.nixUser;
+      userEmail = env.nixUserEmail;
       extraConfig = {
         credential.helper = "${
           pkgs.git.override { withLibsecret = true; }
