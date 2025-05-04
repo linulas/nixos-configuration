@@ -2,7 +2,7 @@
   description = "Linulas NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     sops-nix = {

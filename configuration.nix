@@ -1,4 +1,4 @@
-{ inputs, pkgs, pkgsUnstable, ... }:
+{ inputs, pkgs, pkgsUnstable, config, ... }:
 
 let
   env = import ./home/local/env.nix; # NOTE: Untracked file, must be added manually
@@ -19,7 +19,7 @@ in
     efi.canTouchEfiVariables = true;
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest; # Must have for networking to work with newer AMD motherboards
+  boot.kernelPackages = pkgsUnstable.linuxPackages_latest;
 
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs; };
@@ -88,6 +88,15 @@ in
   powerManagement.cpuFreqGovernor = "performance";
 
   services = {
+    gvfs.enable = true;
+    gnome.gnome-keyring.enable = true;
+    blueman.enable = true;
+    hardware.openrgb.enable = true;
+
+    logind.extraConfig = ''
+      HandlePowerKey=suspend
+    '';
+
     xserver = {
       enable = true;
       xkb = {
@@ -101,9 +110,7 @@ in
         wayland = true;
       };
     };
-    gvfs.enable = true;
-    gnome.gnome-keyring.enable = true;
-    blueman.enable = true;
+
     pipewire = {
       enable = true;
       alsa = {
@@ -145,6 +152,7 @@ in
     dunst
     fd
     firefox
+    gamemode
     gcc
     gnome-keyring
     gparted
@@ -157,6 +165,7 @@ in
     libsecret
     lm_sensors
     mangohud
+    mesa
     pkgsUnstable.neovim
     networkmanagerapplet
     nil
@@ -169,11 +178,13 @@ in
     qpwgraph
     ripgrep
     sops
-    # rocmPackages.llvm.lldb
     xclip
     ulauncher
     unrar
     unzip
+    vulkan-tools
+    wineWowPackages.wayland
+    wineWow64Packages.wayland
     zsh-powerlevel10k
   ];
 
@@ -264,11 +275,20 @@ in
     graphics = {
       enable = true;
       enable32Bit = true;
+      extraPackages = with pkgs; [
+        vulkan-loader
+        vulkan-tools
+        vulkan-headers
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        vulkan-loader
+      ];
     };
     bluetooth.enable = true;
     nvidia = {
       open = true;
       modesetting.enable = true;
+      nvidiaSettings = true;
     };
   };
 
