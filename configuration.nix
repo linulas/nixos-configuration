@@ -1,4 +1,4 @@
-{ inputs, pkgs, pkgsUnstable, config, ... }:
+{ inputs, pkgs, pkgsUnstable, ... }:
 
 let
   env = import ./home/local/env.nix; # NOTE: Untracked file, must be added manually
@@ -16,6 +16,7 @@ in
 
   boot.loader = {
     systemd-boot.enable = true;
+    systemd-boot.configurationLimit = 5;
     efi.canTouchEfiVariables = true;
   };
 
@@ -101,7 +102,7 @@ in
       enable = true;
       xkb = {
         variant = "";
-        layout = "se";
+        layout = "se,us";
       };
       excludePackages = [ pkgs.xterm ];
       videoDrivers = [ "nvidia" ];
@@ -289,6 +290,9 @@ in
       open = true;
       modesetting.enable = true;
       nvidiaSettings = true;
+      powerManagement = {
+        enable = true;
+      };
     };
   };
 
