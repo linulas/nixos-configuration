@@ -18,8 +18,6 @@ in
       feh
       go
       gopls
-      htop
-      iftop
       lazygit
       lua-language-server
       lutris
@@ -27,10 +25,13 @@ in
       multiviewer-for-f1
       neofetch
       netcoredbg
+      nexusmods-app-unfree
       nixpkgs-fmt
       nodejs_20
+      nvitop
       obsidian
       prettierd
+      protontricks
       postman
       reaper
       rustup
@@ -57,6 +58,9 @@ in
   };
 
   programs = {
+    btop = {
+      enable = true;
+    };
     git = {
       enable = true;
       userName = env.nixUser;
