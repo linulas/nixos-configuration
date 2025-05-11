@@ -225,6 +225,9 @@ in
         thunar-volman
       ];
     };
+
+    file-roller.enable = true;
+
     waybar = {
       enable = true;
       package = pkgs.waybar.overrideAttrs (oldAttrs: {
