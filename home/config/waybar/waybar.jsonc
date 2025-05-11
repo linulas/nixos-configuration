@@ -10,19 +10,18 @@
   ],
   "modules-right": [
     "cpu",
-    "temperature",
     "memory",
     "disk",
     "pulseaudio",
     "tray",
     "group/group-power"
   ],
-  "custom/appmenu": {
-    "format": "Menu {icon}",
-    "format-icon": "󰻀",
-    "rotate": 0,
-    "on-click": "~/.config/waybar/launch_menu.sh"
-  },
+  // "custom/appmenu": {
+  //   "format": "Menu {icon}",
+  //   "format-icon": "󰻀",
+  //   "rotate": 0,
+  //   "on-click": "~/.config/waybar/launch_menu.sh"
+  // },
   "wlr/taskbar": {
     "format": "{icon}",
     "tooltip": true,
@@ -34,31 +33,32 @@
   "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "",
-      "4": "",
-      "5": "",
-      "6": "",
-      "7": "",
-      "8": "",
-      "9": "",
-      "10": "",
-      "active": "",
+      "1": "➀",
+      "2": "➁",
+      "3": "➂",
+      "4": "➃",
+      "5": "➄",
+      "6": "➅",
+      "7": "➆",
+      "8": "➇",
+      "9": "➈",
+      "10": "➉",
+      "active": "",
       "default": ""
     },
     "persistent-workspaces": {
-      "HDMI-A-1": [
+      "DP-3": [
         1,
-        2,
         3,
-        4,
         5,
-        6,
         7,
-        8,
-        9,
-        10
+        9
+      ],
+      "HDMI-A-2": [
+        2,
+        4,
+        6,
+        8
       ]
     }
   },
@@ -80,13 +80,6 @@
   "cpu": {
     "format": "⧯ Cpu: {usage}%",
     "tooltip": true
-  },
-  "temperature": {
-    // "thermal-zone": 2,
-    // "hwmon-path": ["/sys/class/hwmon/hwmon2/temp1_input", "/sys/class/thermal/thermal_zone0/temp"],
-    // "critical-threshold": 80,
-    // "format-critical": "{temperatureC}°C ",
-    "format": "{temperatureC}°C "
   },
   "tray": {
     "icon-size": 21,
@@ -167,9 +160,8 @@
   },
   "disk": {
     "interval": 30,
-    "format": " {used}",
-    "unit": "GB",
-    "tooltip-format": " {percentage_used}%"
+    "format": " {percentage_used}%",
+    "tooltip-format": " {used}GB"
   },
   "user": {
     "format": "{user}", //Prints the user name.
