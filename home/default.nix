@@ -16,8 +16,10 @@ in
       discord
       dotnet-sdk_8
       feh
+      geonkick
       go
       gopls
+      hydrogen
       lazygit
       lua-language-server
       lutris
@@ -30,6 +32,7 @@ in
       nodejs_20
       nvitop
       obsidian
+      odin2
       prettierd
       protontricks
       postman
@@ -42,10 +45,10 @@ in
       telegram-desktop
       tutanota-desktop
       vital
-      xarchiver
       nodePackages.svelte-language-server
       nodePackages.typescript-language-server
       vscode-langservers-extracted
+      zynaddsubfx
     ];
 
     file = {
@@ -54,6 +57,7 @@ in
       ".config/waybar/style.css".source = ./config/waybar/waybar_style.css;
       ".config/waybar/launch_menu.sh".source = ./config/waybar/launch_menu.sh;
       ".config/hypr/hyprland.conf".source = ./config/hyprland.conf;
+      ".local/share/applications/nvim.desktop".source = ./config/nvim.desktop;
     };
   };
 
