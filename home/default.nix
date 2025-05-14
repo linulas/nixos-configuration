@@ -57,6 +57,7 @@ in
       ".config/waybar/style.css".source = ./config/waybar/waybar_style.css;
       ".config/waybar/launch_menu.sh".source = ./config/waybar/launch_menu.sh;
       ".config/hypr/hyprland.conf".source = ./config/hyprland.conf;
+      ".config/hypr/run_or_focus_application.sh".source = ./config/run_or_focus_application.sh;
       ".config/REAPER/ColorThemes/Beatwing_v2_5.ReaperThemeZip".source = ./config/reaper/Beatwing_v2_5.ReaperThemeZip;
       ".local/share/applications/nvim.desktop".source = ./config/nvim.desktop;
     };
