@@ -18,15 +18,23 @@
 
         config = {
           allowUnfree = true;
+	  allowUnsupportedSystem = true;
         };
       };
       env = import ./local/env.nix; # NOTE: Untracked file, must be added manually
     in
     {
-      homeConfigurations."${env.nixUser}" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations = {
+        "${env.nixUser}" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
 
-        modules = [ ./default.nix ];
+          modules = [ ./default.nix ];
+        };
+        "${env.nixWorkUser}" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+
+          modules = [ ./work.nix ];
+        };
       };
     };
 }

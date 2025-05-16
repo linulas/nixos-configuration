@@ -26,6 +26,7 @@ in
     extraSpecialArgs = { inherit inputs pkgs; };
     users = {
       "${env.nixUser}" = import ./home/default.nix;
+      "${env.nixWorkUser}" = import ./home/work.nix;
     };
   };
 
@@ -127,10 +128,17 @@ in
 
   users = {
     defaultUserShell = pkgs.zsh;
-    users."${env.nixUser}" = {
-      isNormalUser = true;
-      description = env.nixUser;
-      extraGroups = [ "networkmanager" "wheel" "docker" "audio" "video" "storage" "plugdev" ];
+    users = {
+      "${env.nixUser}" = {
+        isNormalUser = true;
+        description = env.nixUser;
+        extraGroups = [ "networkmanager" "wheel" "docker" "audio" "video" "storage" "plugdev" ];
+      };
+      "${env.nixWorkUser}" = {
+        isNormalUser = true;
+        description = env.nixWorkUser;
+        extraGroups = [ "networkmanager" "wheel" "docker" ];
+      };
     };
   };
 
