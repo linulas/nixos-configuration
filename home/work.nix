@@ -43,8 +43,9 @@ in
       ".config/waybar/config.jsonc".source = ./config/waybar/waybar.jsonc;
       ".config/waybar/style.css".source = ./config/waybar/waybar_style.css;
       ".config/waybar/launch_menu.sh".source = ./config/waybar/launch_menu.sh;
-      ".config/hypr/hyprland.conf".source = ./config/hyprland.conf;
-      ".config/hypr/run_or_focus_application.sh".source = ./config/run_or_focus_application.sh;
+      ".config/hypr/hyprland.conf".source = ./config/hyprland/hyprland.conf;
+      ".config/hypr/apps.conf".source = ./config/hyprland/hyprapps_work.conf;
+      ".config/hypr/run_or_focus_application.sh".source = ./config/hyprland/run_or_focus_application.sh;
       ".local/share/applications/nvim.desktop".source = ./config/nvim.desktop;
     };
   };
