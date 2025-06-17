@@ -16,11 +16,11 @@ in
 
   boot.loader = {
     systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 5;
+    systemd-boot.configurationLimit = 15;
     efi.canTouchEfiVariables = true;
   };
 
-  boot.kernelPackages = pkgsUnstable.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs; };
@@ -90,6 +90,10 @@ in
   powerManagement.cpuFreqGovernor = "performance";
 
   services = {
+    usbmuxd = {
+      enable = true;
+      package = pkgs.usbmuxd2;
+    };
     gvfs.enable = true;
     gnome.gnome-keyring.enable = true;
     blueman.enable = true;
@@ -192,13 +196,15 @@ in
     ripgrep
     sops
     xclip
-    ulauncher
+    pkgsUnstable.ulauncher
     unrar
     unzip
     vulkan-tools
     wineWowPackages.wayland
     wineWow64Packages.wayland
     zsh-powerlevel10k
+    libimobiledevice
+    ifuse # optional, to mount using 'ifuse'
   ];
 
   environment.variables =
