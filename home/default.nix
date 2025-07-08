@@ -34,6 +34,7 @@ in
       nvitop
       obsidian
       odin2
+      playerctl
       prettierd
       protontricks
       postman
@@ -59,6 +60,7 @@ in
       ".config/waybar/config.jsonc".source = ./config/waybar/waybar.jsonc;
       ".config/waybar/style.css".source = ./config/waybar/waybar_style.css;
       ".config/waybar/launch_menu.sh".source = ./config/waybar/launch_menu.sh;
+      ".config/waybar/display_spotify_song.sh".source = ./config/waybar/display_spotify_song.sh;
       ".config/hypr/hyprland.conf".source = ./config/hyprland/hyprland.conf;
       ".config/hypr/hyprpaper.conf".source = ./config/hyprland/hyprpaper.conf;
       ".config/hypr/apps.conf".source = ./config/hyprland/hyprapps_default.conf;

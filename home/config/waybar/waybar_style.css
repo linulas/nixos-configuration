@@ -249,3 +249,7 @@ window#waybar {
   padding-left: 10px;
   color: white;
 }
+
+#custom-spotify {
+  color: white;
+}

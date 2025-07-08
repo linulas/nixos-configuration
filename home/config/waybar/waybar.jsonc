@@ -3,7 +3,8 @@
   "position": "top", // Appears at the top of the screen. Possible values are top, right, bottom, left.
   "modules-left": [
     "clock",
-    "wlr/taskbar"
+    "wlr/taskbar",
+    "custom/spotify"
   ],
   "modules-center": [
     "hyprland/workspaces"
@@ -157,6 +158,12 @@
     "format": "⏻",
     "tooltip-format": "Shutdown",
     "on-click": "shutdown now"
+  },
+  "custom/spotify": {
+    "format": "♫ {}",
+    "interval": 1,
+    "exec": "~/.config/waybar/display_spotify_song.sh",
+    "return-type": "text"
   },
   "disk": {
     "interval": 30,
