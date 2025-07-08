@@ -189,7 +189,6 @@ in
     nitrogen
     pasystray
     protonup
-    pulseaudioFull
     pwvucontrol
     qjackctl
     qpwgraph
