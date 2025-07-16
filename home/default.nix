@@ -11,7 +11,6 @@ in
     packages = with pkgs; [
       brave
       csharp-ls
-      caprine-bin
       delve
       discord
       dotnet-sdk_8
