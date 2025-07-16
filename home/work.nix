@@ -27,6 +27,8 @@ in
       obsidian
       prettierd
       postman
+      redis
+      redisinsight
       rustup
       slack
       spotify
@@ -41,6 +43,7 @@ in
     file = {
       ".config/kitty/kitty.conf".source = ./config/kitty.conf;
       ".config/waybar/config.jsonc".source = ./config/waybar/waybar.jsonc;
+      ".config/waybar/display_spotify_song.sh".source = ./config/waybar/display_spotify_song.sh;
       ".config/waybar/style.css".source = ./config/waybar/waybar_style.css;
       ".config/waybar/launch_menu.sh".source = ./config/waybar/launch_menu.sh;
       ".config/hypr/hyprland.conf".source = ./config/hyprland/hyprland.conf;
