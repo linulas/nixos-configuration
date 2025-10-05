@@ -55,7 +55,8 @@ in
     ];
 
     file = {
-      ".config/kitty/kitty.conf".source = ./config/kitty.conf;
+      ".config/kitty/kitty.conf".source = ./config/kitty/kitty.conf;
+      ".config/kitty/tab_bar.py".source = ./config/kitty/tab_bar.py;
       ".config/waybar/config.jsonc".source = ./config/waybar/waybar.jsonc;
       ".config/waybar/style.css".source = ./config/waybar/waybar_style.css;
       ".config/waybar/launch_menu.sh".source = ./config/waybar/launch_menu.sh;

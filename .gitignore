@@ -2,3 +2,4 @@
 /home/local
 .sops.yaml
 hardware-configuration.nix
+.DS_Store
