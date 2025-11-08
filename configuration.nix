@@ -1,4 +1,4 @@
-{ inputs, pkgs, pkgsUnstable, ... }:
+{ inputs, pkgs, pkgsUnstable, config, ... }:
 
 let
   env = import ./home/local/env.nix; # NOTE: Untracked file, must be added manually
@@ -21,6 +21,13 @@ in
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
+  boot.kernelModules = [ "v4l2loopback" ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
 
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs; };
@@ -60,32 +67,39 @@ in
     LC_TIME = "en_US.utf8"; # required by dmenu don't change this
   };
 
-  security.pam.loginLimits = [
-    {
-      domain = "@audio";
-      type = "soft";
-      item = "rtprio";
-      value = "95";
-    }
-    {
-      domain = "@audio";
-      type = "hard";
-      item = "rtprio";
-      value = "99";
-    }
-    {
-      domain = "@audio";
-      type = "soft";
-      item = "memlock";
-      value = "unlimited";
-    }
-    {
-      domain = "@audio";
-      type = "hard";
-      item = "memlock";
-      value = "unlimited";
-    }
-  ];
+  security = {
+    pam = {
+      loginLimits = [
+        {
+          domain = "@audio";
+          type = "soft";
+          item = "rtprio";
+          value = "95";
+        }
+        {
+          domain = "@audio";
+          type = "hard";
+          item = "rtprio";
+          value = "99";
+        }
+        {
+          domain = "@audio";
+          type = "soft";
+          item = "memlock";
+          value = "unlimited";
+        }
+        {
+          domain = "@audio";
+          type = "hard";
+          item = "memlock";
+          value = "unlimited";
+        }
+      ];
+
+      services.greetd.enable = true;
+    };
+
+  };
 
   powerManagement.cpuFreqGovernor = "performance";
 
@@ -232,6 +246,14 @@ in
   fonts.packages = [ pkgs.nerd-fonts.sauce-code-pro ];
 
   programs = {
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        glibc
+        libcxx
+      ];
+    };
     thunar = {
       enable = true;
       plugins = with pkgs.xfce; [
