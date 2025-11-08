@@ -9,7 +9,10 @@ in
     homeDirectory = "/home/${env.nixUser}";
 
     packages = with pkgs; [
+      bacon
       brave
+      cargo
+      clippy
       csharp-ls
       delve
       discord
@@ -38,7 +41,9 @@ in
       protontricks
       postman
       reaper
-      rustup
+      rust-analyzer
+      rustfmt
+      rustc
       spotify
       stylua
       surge-XT
