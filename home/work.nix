@@ -9,11 +9,15 @@ in
     homeDirectory = "/home/${env.nixWorkUser}";
 
     packages = with pkgs; [
+      bacon
       brave
+      cargo
+      clippy
       bruno
       csharp-ls
       delve
       dotnet-sdk_8
+      grim
       go
       gopls
       lazygit
@@ -22,17 +26,19 @@ in
       neofetch
       netcoredbg
       nixpkgs-fmt
-      nodejs_20
+      nodejs_22
       nvitop
       obsidian
       prettierd
       postman
       redis
       redisinsight
-      rustup
+      rust-analyzer
+      rustfmt
       slack
       spotify
       stylua
+      slurp
       teams-for-linux
       tutanota-desktop
       nodePackages.svelte-language-server
@@ -67,6 +73,20 @@ in
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";
       };
+    };
+    obs-studio = {
+      enable = true;
+
+      # optional Nvidia hardware acceleration
+      package = (
+        pkgs.obs-studio.override {
+          cudaSupport = true;
+        }
+      );
+
+      plugins = with pkgs.obs-studio-plugins; [
+        droidcam-obs
+      ];
     };
   };
 
