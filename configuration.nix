@@ -144,6 +144,16 @@ in
     udev.extraRules = ''
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
     '';
+
+    openvpn.servers = {
+      switzerland = {
+        autoStart = false;
+        config = ''
+          config ${env.ovpn_switzerland_path}
+          auth-user-pass ${config.sops.secrets.ovpn_switzerland_credentials.path}
+        '';
+      };
+    };
   };
 
   console.keyMap = "sv-latin1";
