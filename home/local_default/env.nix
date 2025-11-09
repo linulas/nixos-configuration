@@ -10,4 +10,5 @@
   hosts = builtins.trace "HOSTS:"
       ''
       '';
+  ovpn_switzerland_path = builtins.trace "OVN_SWITZERLAND_PATH: not set" "";
 }
