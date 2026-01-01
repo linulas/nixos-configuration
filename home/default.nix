@@ -17,6 +17,7 @@ in
       delve
       discord
       dotnet-sdk_8
+      drum-machine
       feh
       geonkick
       go
@@ -53,6 +54,8 @@ in
       tutanota-desktop
       vial
       vital
+      vlc
+      wget
       nodePackages.svelte-language-server
       nodePackages.typescript-language-server
       vscode-langservers-extracted
