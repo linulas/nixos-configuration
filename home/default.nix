@@ -34,7 +34,6 @@ in
       nexusmods-app-unfree
       nixpkgs-fmt
       nodejs_20
-      nvitop
       obsidian
       odin2
       playerctl
@@ -86,9 +85,12 @@ in
     };
     git = {
       enable = true;
-      userName = env.nixUser;
-      userEmail = env.nixUserEmail;
-      extraConfig = {
+      settings = {
+        user = {
+          name = env.nixUser;
+          email = env.nixUserEmail;
+        };
+        init.defaultBranch = "main";
         credential.helper = "${
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";

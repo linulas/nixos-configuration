@@ -27,7 +27,6 @@ in
       netcoredbg
       nixpkgs-fmt
       nodejs_22
-      nvitop
       obsidian
       prettierd
       postman
@@ -66,9 +65,11 @@ in
     };
     git = {
       enable = true;
-      userName = env.nixUser;
-      userEmail = env.nixWorkUserEmail;
-      extraConfig = {
+      settings = {
+        user = {
+          name = env.nixUser;
+          email = env.nixWorkUserEmail;
+        };
         credential.helper = "${
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";

@@ -112,10 +112,12 @@ in
     gnome.gnome-keyring.enable = true;
     blueman.enable = true;
     hardware.openrgb.enable = true;
+    logind.settings.Login.HandlePowerKey = "suspend";
 
-    logind.extraConfig = ''
-      HandlePowerKey=suspend
-    '';
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
 
     xserver = {
       enable = true;
@@ -125,10 +127,6 @@ in
       };
       excludePackages = [ pkgs.xterm ];
       videoDrivers = [ "nvidia" ];
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
-      };
     };
 
     pipewire = {
@@ -174,14 +172,6 @@ in
     };
   };
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = (_: true);
-      pulseaudio = true;
-    };
-  };
-
   environment.systemPackages = with pkgs; [
     alsa-utils
     pkgsUnstable._1password-cli
@@ -193,6 +183,7 @@ in
     dunst
     fd
     firefox
+    file-roller
     gamemode
     gcc
     gnome-keyring
@@ -207,12 +198,13 @@ in
     lm_sensors
     mangohud
     mesa
+    nvitop
     pkgsUnstable.neovim
     networkmanagerapplet
     nil
     nitrogen
     pasystray
-    protonup
+    protonup-ng
     pwvucontrol
     qjackctl
     qpwgraph
@@ -273,8 +265,6 @@ in
       ];
     };
 
-    file-roller.enable = true;
-
     waybar = {
       enable = true;
       package = pkgs.waybar.overrideAttrs (oldAttrs: {
@@ -283,7 +273,7 @@ in
     };
     hyprland = {
       enable = true;
-      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+      package = inputs.hyprland.packages."${pkgs.stdenv.hostPlatform.system}".hyprland;
       xwayland.enable = true;
     };
     zsh = {

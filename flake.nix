@@ -2,7 +2,7 @@
   description = "Linulas NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     sops-nix = {
@@ -11,7 +11,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -27,6 +27,7 @@
         config = {
           allowUnfree = true;
           allowUnfreePredicate = (pkg: true);
+          pulseaudio = true;
         };
       };
 
@@ -36,17 +37,22 @@
         config = {
           allowUnfree = true;
           allowUnfreePredicate = (pkg: true);
+          pulseaudio = true;
         };
       };
     in
     {
       nixosConfigurations = {
         default = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs outputs system pkgs pkgsUnstable; };
+          specialArgs = { inherit inputs outputs pkgsUnstable; };
 
           modules = [
             ./configuration.nix
+            # Set the main pkgs instance using the one defined in the 'let' block
+            { nixpkgs.pkgs = pkgs; }
+            ({ modulesPath, ... }: {
+              imports = [ (modulesPath + "/misc/nixpkgs/read-only.nix") ];
+            })
           ];
         };
       };

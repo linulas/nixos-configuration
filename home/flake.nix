@@ -3,9 +3,9 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     home-manager = {
-      url = "github:nix-community/home-manager/0b491b460f52e87e23eb17bbf59c6ae64b7664c1";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -18,7 +18,7 @@
 
         config = {
           allowUnfree = true;
-	  allowUnsupportedSystem = true;
+          allowUnsupportedSystem = true;
         };
       };
       env = import ./local/env.nix; # NOTE: Untracked file, must be added manually
