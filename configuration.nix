@@ -223,6 +223,7 @@ in
     unrar
     unzip
     vulkan-tools
+    wl-clipboard
     wineWowPackages.wayland
     wineWow64Packages.wayland
     zsh-powerlevel10k
