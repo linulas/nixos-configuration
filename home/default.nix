@@ -19,11 +19,14 @@ in
       dotnet-sdk_8
       drum-machine
       feh
+      fzf
       geonkick
       go
       gopls
+      grim
       hydrogen
       hyprpaper
+      jdk25
       lazygit
       lua-language-server
       lutris
@@ -44,6 +47,7 @@ in
       rust-analyzer
       rustfmt
       rustc
+      slurp
       spotify
       stylua
       surge-XT
