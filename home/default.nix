@@ -11,6 +11,7 @@ in
     packages = with pkgs; [
       bacon
       brave
+      bruno
       cargo
       clippy
       csharp-ls
@@ -36,13 +37,12 @@ in
       netcoredbg
       nexusmods-app-unfree
       nixpkgs-fmt
-      nodejs_20
+      nodejs_24
       obsidian
       odin2
       playerctl
       prettierd
       protontricks
-      postman
       reaper
       rust-analyzer
       rustfmt
@@ -87,6 +87,19 @@ in
     btop = {
       enable = true;
     };
+
+    firefox = {
+      enable = true;
+      profiles.default = {
+        isDefault = true;
+        settings = {
+          "browser.sessionstore.resume_from_crash" = true;
+          "browser.sessionstore.interval" = 15000;
+          "browser.startup.page" = 3;
+        };
+      };
+    };
+
     git = {
       enable = true;
       settings = {

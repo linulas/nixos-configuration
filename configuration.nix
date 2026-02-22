@@ -31,6 +31,7 @@ in
 
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs; };
+    backupFileExtension = "backup";
     users = {
       "${env.nixUser}" = import ./home/default.nix;
       "${env.nixWorkUser}" = import ./home/work.nix;
@@ -182,7 +183,6 @@ in
     docker
     dunst
     fd
-    firefox
     file-roller
     gamemode
     gcc
