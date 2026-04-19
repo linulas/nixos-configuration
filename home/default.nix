@@ -59,6 +59,7 @@ in
       vital
       vlc
       wget
+      wonderdraft
       nodePackages.svelte-language-server
       nodePackages.typescript-language-server
       vscode-langservers-extracted

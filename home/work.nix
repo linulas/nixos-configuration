@@ -65,6 +65,9 @@ in
     };
     git = {
       enable = true;
+      extraConfig = {
+        url."git@ssh.dev.azure.com:v3/sida-development/sida.se/dotnet-common".insteadOf = "https://dev.azure.com/sida-development/sida.se/_git/dotnet-common";
+      };
       settings = {
         user = {
           name = env.nixUser;
