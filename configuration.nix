@@ -189,6 +189,7 @@ in
     gnome-keyring
     gparted
     home-manager
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     hyprlock
     hyprpolkitagent
     kitty
