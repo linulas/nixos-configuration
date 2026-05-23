@@ -9,11 +9,13 @@ in
     homeDirectory = "/home/${env.nixUser}";
 
     packages = with pkgs; [
+      asciiquarium
       bacon
       brave
       bruno
       cargo
       clippy
+      cmatrix
       csharp-ls
       delve
       discord
@@ -48,11 +50,13 @@ in
       rustfmt
       rustc
       slurp
+      speedtest-cli
       spotify
       stylua
       surge-XT
       synergy
       steamtinkerlaunch
+      swappy
       telegram-desktop
       tutanota-desktop
       vial
