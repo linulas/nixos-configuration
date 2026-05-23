@@ -211,6 +211,7 @@ in
     qpwgraph
     ripgrep
     sops
+    tree-sitter
     xclip
     pkgsUnstable.ulauncher
     unrar
