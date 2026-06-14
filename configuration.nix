@@ -117,7 +117,6 @@ in
 
     displayManager.gdm = {
       enable = true;
-      wayland = true;
     };
 
     xserver = {
@@ -211,6 +210,8 @@ in
     qpwgraph
     ripgrep
     sops
+    thunar-archive-plugin
+    thunar-volman
     tree-sitter
     xclip
     pkgsUnstable.ulauncher
@@ -218,7 +219,6 @@ in
     unzip
     vulkan-tools
     wl-clipboard
-    wineWowPackages.wayland
     wineWow64Packages.wayland
     zsh-powerlevel10k
     libimobiledevice
@@ -261,10 +261,6 @@ in
     };
     thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
     };
 
     waybar = {

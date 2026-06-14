@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   env = import ./local/env.nix; # NOTE: Untracked file, must be added manually
 in
@@ -14,6 +14,7 @@ in
       brave
       bruno
       cargo
+      claude-code
       clippy
       cmatrix
       csharp-ls
@@ -21,6 +22,7 @@ in
       discord
       dotnet-sdk_8
       drum-machine
+      fastfetch
       feh
       fzf
       geonkick
@@ -35,7 +37,6 @@ in
       lutris
       marksman
       multiviewer-for-f1
-      neofetch
       netcoredbg
       nexusmods-app-unfree
       nixpkgs-fmt
@@ -53,7 +54,7 @@ in
       speedtest-cli
       spotify
       stylua
-      surge-XT
+      surge-xt
       synergy
       steamtinkerlaunch
       swappy
@@ -64,8 +65,8 @@ in
       vlc
       wget
       wonderdraft
-      nodePackages.svelte-language-server
-      nodePackages.typescript-language-server
+      svelte-language-server
+      typescript-language-server
       vscode-langservers-extracted
       zynaddsubfx
     ];
@@ -95,6 +96,7 @@ in
 
     firefox = {
       enable = true;
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
       profiles.default = {
         isDefault = true;
         settings = {

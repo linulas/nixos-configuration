@@ -23,7 +23,6 @@ in
       lazygit
       lua-language-server
       marksman
-      neofetch
       netcoredbg
       nixpkgs-fmt
       nodejs_22
@@ -31,7 +30,7 @@ in
       prettierd
       postman
       redis
-      redisinsight
+      # redisinsight
       rust-analyzer
       rustfmt
       slack
@@ -40,8 +39,8 @@ in
       slurp
       teams-for-linux
       tutanota-desktop
-      nodePackages.svelte-language-server
-      nodePackages.typescript-language-server
+      svelte-language-server
+      typescript-language-server
       vscode-langservers-extracted
     ];
 
@@ -65,10 +64,8 @@ in
     };
     git = {
       enable = true;
-      extraConfig = {
-        url."git@ssh.dev.azure.com:v3/sida-development/sida.se/dotnet-common".insteadOf = "https://dev.azure.com/sida-development/sida.se/_git/dotnet-common";
-      };
       settings = {
+        url."git@ssh.dev.azure.com:v3/sida-development/sida.se/dotnet-common".insteadOf = "https://dev.azure.com/sida-development/sida.se/_git/dotnet-common";
         user = {
           name = env.nixUser;
           email = env.nixWorkUserEmail;
