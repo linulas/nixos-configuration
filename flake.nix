@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # Pinned older nixpkgs for claude-desktop, which still references
+    # nodePackages.asar (removed from nixpkgs on 2026-03-03).
+    nixpkgs-2505.url = "github:nixos/nixpkgs/nixos-25.05";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     sops-nix = {
       url = "github:mic92/sops-nix";
@@ -18,6 +21,11 @@
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    claude-desktop = {
+      url = "github:k3d3/claude-desktop-linux-flake";
+      inputs.nixpkgs.follows = "nixpkgs-2505";
     };
   };
 

@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, ... }:
 let
   env = import ./local/env.nix; # NOTE: Untracked file, must be added manually
 in
@@ -15,6 +15,7 @@ in
       bruno
       cargo
       claude-code
+      inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop
       clippy
       cmatrix
       csharp-ls
