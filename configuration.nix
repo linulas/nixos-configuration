@@ -223,6 +223,14 @@ in
     zsh-powerlevel10k
     libimobiledevice
     ifuse # optional, to mount using 'ifuse'
+
+    # Strip ambient cap_sys_nice (inherited from the Hyprland wrapper) before
+    # launching Steam, otherwise Steam's bundled bwrap 0.11+ aborts with:
+    #   "Unexpected capabilities but not setuid, old file caps config?"
+    (writeShellScriptBin "steam" ''
+      exec ${util-linux}/bin/setpriv --ambient-caps -all -- \
+        ${config.programs.steam.package}/bin/steam "$@"
+    '')
   ];
 
   environment.variables =
