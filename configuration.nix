@@ -178,6 +178,8 @@ in
     pkgsUnstable._1password-gui
     bottles
     carla
+    pkgsUnstable.claude-code
+    claude-agent-acp
     dmenu
     docker
     dunst
@@ -291,8 +293,9 @@ in
       shellAliases = {
         update = "sudo nixos-rebuild switch --flake path:${env.rootFlakePath}#default";
         updatehome = "home-manager switch --flake path:${env.rootFlakePath}/home";
-        upgrade = "sudo nix flake update ${env.rootFlakePath} && update";
-        upgradehome = "nix flake update ${env.rootFlakePath}/home && updatehome";
+        upgrade = "sudo nix flake update nixpkgs --flake ${env.rootFlakePath} && update";
+        upgrade-unstable = "sudo nix flake update nixpkgs-unstable --flake ${env.rootFlakePath} && update";
+        upgradehome = "nix flake update nixpkgs --flake ${env.rootFlakePath}/home && updatehome";
       };
     };
 
