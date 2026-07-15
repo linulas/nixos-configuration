@@ -13,10 +13,11 @@ in
       brave
       cargo
       clippy
+      csharp-ls
       bruno
       csharp-ls
       delve
-      dotnet-sdk_8
+      dotnet-sdk_10
       grim
       go
       gopls
