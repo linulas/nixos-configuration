@@ -14,7 +14,6 @@ in
       brave
       bruno
       cargo
-      claude-code
       inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop
       clippy
       cmatrix
