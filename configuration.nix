@@ -311,6 +311,15 @@ in
   security = {
     polkit.enable = true;
     rtkit.enable = true;
+
+    # The Hyprland module wraps the binary with ambient cap_sys_nice so the
+    # compositor can give itself realtime priority. Ambient capabilities are
+    # inherited by every app launched from Hyprland, and the kernel then
+    # denies the (capability-less) xdg-desktop-portal ptrace access to those
+    # processes, so the portal rejects every request — file/folder pickers
+    # (Obsidian "open folder" etc.) silently do nothing. Drop the capability;
+    # Hyprland just falls back to normal scheduling.
+    wrappers.Hyprland.capabilities = pkgs.lib.mkForce "";
   };
 
   virtualisation.docker = {
