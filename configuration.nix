@@ -21,10 +21,15 @@ in
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.supportedFilesystems = [ "ntfs" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
   boot.kernelModules = [ "v4l2loopback" ];
+  # Blacklist the kernel ntfs3 driver so udisks2 mounts NTFS volumes with the
+  # tolerant ntfs-3g (FUSE) helper. ntfs3 refuses dirty volumes left behind by
+  # Windows Fast Startup with: volume is dirty and "force" flag is not set.
+  boot.blacklistedKernelModules = [ "ntfs3" ];
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
   '';
@@ -110,6 +115,7 @@ in
       package = pkgs.usbmuxd2;
     };
     gvfs.enable = true;
+    udisks2.enable = true;
     gnome.gnome-keyring.enable = true;
     blueman.enable = true;
     hardware.openrgb.enable = true;
@@ -200,6 +206,7 @@ in
     lm_sensors
     mangohud
     mesa
+    ntfs3g
     nvitop
     pkgsUnstable.neovim
     networkmanagerapplet
