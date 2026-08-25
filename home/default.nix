@@ -53,6 +53,7 @@ in
       slurp
       speedtest-cli
       spotify
+      sshfs
       stylua
       surge-xt
       synergy
