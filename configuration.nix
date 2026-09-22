@@ -20,7 +20,9 @@ in
     efi.canTouchEfiVariables = true;
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Pinned to the default stable kernel: linuxPackages_latest (7.2.x) broke the
+  # nvidia 595.71.05 module build (implicit strncpy / missing <string.h>).
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.supportedFilesystems = [ "ntfs" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
@@ -147,6 +149,16 @@ in
 
     udev.extraRules = ''
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+
+      # Logitech/Saitek X52 & X52 Pro HOTAS - Joystick tagging
+      SUBSYSTEM=="input", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0255", MODE="0666", ENV{ID_INPUT_JOYSTICK}="1"
+      SUBSYSTEM=="input", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="075c", MODE="0666", ENV{ID_INPUT_JOYSTICK}="1"
+      SUBSYSTEM=="input", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0762", MODE="0666", ENV{ID_INPUT_JOYSTICK}="1"
+
+      # Raw HID access for advanced MFD/LED control (e.g., via libx52)
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0255", MODE="0666"
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="075c", MODE="0666"
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0762", MODE="0666"
     '';
 
     openvpn.servers = {
@@ -300,7 +312,8 @@ in
       shellAliases = {
         update = "sudo nixos-rebuild switch --flake path:${env.rootFlakePath}#default";
         updatehome = "home-manager switch --flake path:${env.rootFlakePath}/home";
-        upgrade = "sudo nix flake update nixpkgs --flake ${env.rootFlakePath} && update";
+        # Update all inputs except the Claude-related pins (nixpkgs-2505, claude-desktop).
+        upgrade = "sudo nix flake update nixpkgs nixpkgs-unstable hyprland sops-nix home-manager zen-browser --flake ${env.rootFlakePath} && update";
         upgrade-unstable = "sudo nix flake update nixpkgs-unstable --flake ${env.rootFlakePath} && update";
         upgradehome = "nix flake update nixpkgs --flake ${env.rootFlakePath}/home && updatehome";
       };

@@ -21,20 +21,20 @@ if hyprctl clients | grep -q "class:.$APP_NAME_SEARCH"; then
   WORKSPACE_ID=$(hyprctl clients | grep "class..$APP_NAME_SEARCH" -B4 | grep 'workspace:' | sort | uniq | head -n 1 | sed -e 's/.*: //g' -e 's/ .*//g')
 
   if [ -n "$WORKSPACE_ID" ]; then
-    hyprctl dispatch workspace "$WORKSPACE_ID"
+    hyprctl dispatch "hl.dsp.focus({ workspace = $WORKSPACE_ID })"
 
-    hyprctl dispatch focuswindow "class:^(.*$APP_NAME_SEARCH.*)$"
+    hyprctl dispatch "hl.dsp.focus({ window = \"class:^(.*$APP_NAME_SEARCH.*)\$\" })"
   else
     # This might happen if the app was detected but its workspace ID couldn't be parsed.
     echo "Warning: '$APP_NAME_SEARCH' is running, but could not determine its workspace. Attempting to focus by class only."
     # Try to focus anyway - focuswindow might find it across workspaces or if it's on the current one.
-    if ! hyprctl dispatch focuswindow "class:^(.*$APP_NAME_SEARCH.*)$"; then
+    if ! hyprctl dispatch "hl.dsp.focus({ window = \"class:^(.*$APP_NAME_SEARCH.*)\$\" })"; then
         echo "Error: Failed to focus '$APP_NAME_SEARCH' even though it was detected."
     fi
   fi
 else
   echo "App '$APP_NAME_SEARCH' is not running. Launching via hyprctl..."
-  hyprctl dispatch exec "$LAUNCH_COMMAND"
+  hyprctl dispatch "hl.dsp.exec_cmd(\"$LAUNCH_COMMAND\")"
 fi
 
 exit 0

@@ -52,9 +52,12 @@ in
       ".config/waybar/display_spotify_song.sh".source = ./config/waybar/display_spotify_song.sh;
       ".config/waybar/style.css".source = ./config/waybar/waybar_style.css;
       ".config/waybar/launch_menu.sh".source = ./config/waybar/launch_menu.sh;
-      ".config/hypr/hyprland.conf".source = ./config/hyprland/hyprland.conf;
-      ".config/hypr/apps.conf".source = ./config/hyprland/hyprapps_work.conf;
-      ".config/hypr/run_or_focus_application.sh".source = ./config/hyprland/run_or_focus_application.sh;
+      ".config/hypr/hyprland.lua".source = ./config/hyprland/hyprland.lua;
+      ".config/hypr/apps.lua".source = ./config/hyprland/hyprapps_work.lua;
+      ".config/hypr/run_or_focus_application.sh" = {
+        source     = ./config/hyprland/run_or_focus_application.sh;
+        executable = true;
+      };
       ".local/share/applications/nvim.desktop".source = ./config/nvim.desktop;
     };
   };

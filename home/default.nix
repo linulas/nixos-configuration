@@ -79,10 +79,13 @@ in
       ".config/waybar/style.css".source = ./config/waybar/waybar_style.css;
       ".config/waybar/launch_menu.sh".source = ./config/waybar/launch_menu.sh;
       ".config/waybar/display_spotify_song.sh".source = ./config/waybar/display_spotify_song.sh;
-      ".config/hypr/hyprland.conf".source = ./config/hyprland/hyprland.conf;
+      ".config/hypr/hyprland.lua".source = ./config/hyprland/hyprland.lua;
       ".config/hypr/hyprpaper.conf".source = ./config/hyprland/hyprpaper.conf;
-      ".config/hypr/apps.conf".source = ./config/hyprland/hyprapps_default.conf;
-      ".config/hypr/run_or_focus_application.sh".source = ./config/hyprland/run_or_focus_application.sh;
+      ".config/hypr/apps.lua".source = ./config/hyprland/hyprapps_default.lua;
+      ".config/hypr/run_or_focus_application.sh" = {
+        source     = ./config/hyprland/run_or_focus_application.sh;
+        executable = true;
+      };
       ".config/hypr/1.png".source = ./config/hyprland/wallpaper/1.png;
       ".config/hypr/2.png".source = ./config/hyprland/wallpaper/2.png;
       ".config/REAPER/ColorThemes/Beatwing_v2_5.ReaperThemeZip".source = ./config/reaper/Beatwing_v2_5.ReaperThemeZip;
