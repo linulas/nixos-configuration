@@ -28,9 +28,6 @@ in
     v4l2loopback
   ];
   boot.kernelModules = [ "v4l2loopback" ];
-  # Blacklist the kernel ntfs3 driver so udisks2 mounts NTFS volumes with the
-  # tolerant ntfs-3g (FUSE) helper. ntfs3 refuses dirty volumes left behind by
-  # Windows Fast Startup with: volume is dirty and "force" flag is not set.
   boot.blacklistedKernelModules = [ "ntfs3" ];
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
@@ -328,17 +325,20 @@ in
     };
   };
 
+  # NOTE: fix for broken app icons
+  systemd.user.services.waybar.environment.PATH = pkgs.lib.mkForce (
+    pkgs.lib.concatStringsSep ":" [
+      "/run/wrappers/bin"
+      "/home/${env.nixUser}/.nix-profile/bin"
+      "/etc/profiles/per-user/${env.nixUser}/bin"
+      "/nix/var/nix/profiles/default/bin"
+      "/run/current-system/sw/bin"
+    ]
+  );
+
   security = {
     polkit.enable = true;
     rtkit.enable = true;
-
-    # The Hyprland module wraps the binary with ambient cap_sys_nice so the
-    # compositor can give itself realtime priority. Ambient capabilities are
-    # inherited by every app launched from Hyprland, and the kernel then
-    # denies the (capability-less) xdg-desktop-portal ptrace access to those
-    # processes, so the portal rejects every request — file/folder pickers
-    # (Obsidian "open folder" etc.) silently do nothing. Drop the capability;
-    # Hyprland just falls back to normal scheduling.
     wrappers.Hyprland.capabilities = pkgs.lib.mkForce "";
   };
 

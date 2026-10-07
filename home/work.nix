@@ -9,6 +9,7 @@ in
     homeDirectory = "/home/${env.nixWorkUser}";
 
     packages = with pkgs; [
+      adwaita-icon-theme # generic GTK fallback icons
       bacon
       brave
       cargo
@@ -92,6 +93,14 @@ in
       plugins = with pkgs.obs-studio-plugins; [
         droidcam-obs
       ];
+    };
+  };
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Papirus";
+      package = pkgs.papirus-icon-theme;
     };
   };
 

@@ -9,6 +9,7 @@ in
     homeDirectory = "/home/${env.nixUser}";
 
     packages = with pkgs; [
+      adwaita-icon-theme # generic GTK fallback icons
       asciiquarium
       bacon
       brave
@@ -123,6 +124,14 @@ in
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";
       };
+    };
+  };
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Papirus";
+      package = pkgs.papirus-icon-theme;
     };
   };
 
