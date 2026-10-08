@@ -46,7 +46,6 @@ local terminal = "kitty"
 
 hl.on("hyprland.start", function()
 	hl.exec_cmd("systemctl --user start hyprpolkitagent")
-	hl.dispatch(hl.dsp.focus({ workspace = 1 }))
 end)
 
 -------------------------------
@@ -106,6 +105,10 @@ hl.config({
 
 	animations = {
 		enabled = true,
+	},
+
+	cursor = {
+		default_monitor = monRight,
 	},
 })
 
