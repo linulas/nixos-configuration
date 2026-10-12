@@ -45,6 +45,7 @@ return function(opts)
 		secondaryBind(key, runOrFocus .. " " .. args)
 	end
 
+	browseTo("Q", "home.google.com/home/1-a0e43552a9ff9d813c33517d115a0b0e5e47feabab05d214dfef59925f40a226/devices")
 	browseTo("W", "monkeytype.com")
 	browseTo("E", "github.com")
 	browseTo("R", "tasks.google.com")
